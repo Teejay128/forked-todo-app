@@ -120,3 +120,19 @@ function addItemToDOM(text, completed) {
 
   list.insertBefore(item, list.childNodes[0]);
 }
+
+function displayMessage(text, status){
+  let body = document.querySelector('body'); 
+  let container = document.querySelector('.container')
+
+  var message = document.createElement('p');
+  message.innerText = text
+
+  message.classList.add(status)
+
+  body.insertBefore(message, container)
+  
+  setTimeout(() => {
+    message.remove();
+  }, 1000)
+}
