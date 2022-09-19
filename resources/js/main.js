@@ -16,6 +16,10 @@ document.getElementById('add').addEventListener('click', function() {
   var value = document.getElementById('item').value;
   if (value) {
     addItem(value);
+    displayMessage(`You added "${value}"!`, 'success')
+  }
+  else {
+    displayMessage(`Enter new activity!`, 'error')
   }
 });
 
@@ -23,6 +27,9 @@ document.getElementById('item').addEventListener('keydown', function (e) {
   var value = this.value;
   if ((e.code === 'Enter' || e.code === 'NumpadEnter') && value) {
     addItem(value);
+    displayMessage(`You added "${value}"!`, 'success')
+  } else if((e.code === 'Enter' || e.code === 'NumpadEnter') && !value){
+    displayMessage(`Enter new activity!`, 'error')
   }
 });
 
@@ -64,6 +71,7 @@ function removeItem() {
     data.completed.splice(data.completed.indexOf(value), 1);
   }
   dataObjectUpdated();
+  displayMessage(`Removed "${value}"!`, 'success')
 
   parent.removeChild(item);
 }
@@ -77,9 +85,11 @@ function completeItem() {
   if (id === 'todo') {
     data.todo.splice(data.todo.indexOf(value), 1);
     data.completed.push(value);
+    displayMessage(`You completed "${value}"!`, 'success')
   } else {
     data.completed.splice(data.completed.indexOf(value), 1);
     data.todo.push(value);
+    displayMessage(`You reversed "${value}"!`, 'success')
   }
   dataObjectUpdated();
 
